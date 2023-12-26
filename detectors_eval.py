@@ -97,6 +97,8 @@ def main():
     in_scores, _ = torch.sort(in_scores, stable=True)
     mid_in_scores = in_scores[in_scores.size()[0] // 2]
     scores = torch.abs(scores - mid_in_scores)
+    in_scores = torch.abs(in_scores - mid_in_scores)
+    out_scores = torch.abs(out_scores - mid_in_scores)
     data_dict['modified_scores'] = (in_scores, out_scores)
 
     p, r, t = binary_roc(scores, labels)
